@@ -33,8 +33,6 @@ def current_time():
 screen_name = "Main"
 fullscreen = False
 cv2.namedWindow(screen_name, cv2.WND_PROP_FULLSCREEN)
-cascPath = "/usr/share/opencv/haarcascades/haarcascade_frontalface_default.xml"
-faceCascade = cv2.CascadeClassifier(cascPath)
 
 cap = None
 cap = cv2.VideoCapture(int(args.c))
@@ -43,15 +41,6 @@ while(1):
     if not ret:
         continue
     grey = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = faceCascade.detectMultiScale(
-        grey,
-        scaleFactor=1.3,
-        minNeighbors=10,
-        minSize=(30, 30),
-        flags=cv2.cv.CV_HAAR_SCALE_IMAGE
-    )
-    for (x, y, w, h) in faces:
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
 
 
