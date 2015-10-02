@@ -1,6 +1,6 @@
 Step s => dac;
 1 => int i => int x => int t => int t16 => s.next;
-[1,1,1,1,1] @=> int y[];
+[1,1,1] @=> int y[];
 256 => int m;
 1 => int samps;
 //256 => int m;
@@ -8,6 +8,31 @@ Step s => dac;
 0.0 => float out;
 
 [1,1,1,1,1,1] @=> int z11[];
+
+
+
+
+
+
+fun int[] z1()
+{
+    return [Std.rand2(1,16), Std.rand2(1,16),Std.rand2(1,256) ,Std.rand2(1,16),Std.rand2(1,16) ,Std.rand2(1,12)];
+} 
+
+fun int[][] zgen()
+{
+
+    int out[y.cap()][z11.cap()];
+    for( 0 => int i; i < y.cap(); i++ )
+    {    
+        z1() @=> out[i];
+    }
+    return out;
+    //return [ z1(),z1(),z1(),z1(),z1()];
+    //return
+}
+
+zgen() @=> int z[][];
 
 fun void setter() {
     OscRecv recv;
@@ -27,6 +52,12 @@ fun void setter() {
 	        for( 0 => int i; i < z11.cap(); i++ ) {
                 (rate_event.getFloat()*255*10000) $ int => z11[i];
             }
+            for (0 => int i; i < z.cap() - 1; i++) {
+                z[i+1] @=> z[i];
+            }
+            z11 @=> z[z.cap()-1];
+            
+            
 	        <<< "got (via OSC):", z11[0] >>>;
 	    }
     }
@@ -34,21 +65,6 @@ fun void setter() {
 spork ~ setter();
 
 
-
-
-
-fun int[] z1()
-{
-    return [Std.rand2(1,16), Std.rand2(1,16),Std.rand2(1,256) ,Std.rand2(1,16),Std.rand2(1,16) ,Std.rand2(1,12)];
-} 
-
-fun int[][] zgen()
-{
-    return [ z1(),z1(),z1(),z1(),z1()];
-    
-}
-
-zgen() @=> int z[][];
 
 while(true)
 {
@@ -87,6 +103,6 @@ while(true)
          t % 65535 => t16;
          samps::samp => now;    
      }
-     z1() @=> z[Std.rand2(0,4)] ;
+     //z1() @=> z[Std.rand2(0,4)] ;
      //zgen() @=> int z[][];
 }
