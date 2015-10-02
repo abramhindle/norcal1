@@ -36,6 +36,8 @@ cv2.namedWindow(screen_name, cv2.WND_PROP_FULLSCREEN)
 
 cap = None
 cap = cv2.VideoCapture(int(args.c))
+ohori = None
+overti = None
 while(1):
     ret, frame = cap.read()
     if not ret:
@@ -48,6 +50,23 @@ while(1):
     cv2.imshow(screen_name,frame)
     horiz = cv2.resize(grey, (16, 1)) 
     vert  = cv2.resize(grey, (1,16))
+    verti = (vert/(10000.0*255.0))[:,0].tolist()
+    hori = (horiz/(10000.0*255.0))[0,:].tolist()    
+    if (ohori == None):
+        ohori = hori
+        overti = verti
+    outi = [8,7,9,6,10,5,11,4,12,3,13,2,14,1,15,0]
+    outi.reverse()
+    out = []
+    for i in outi:
+        if i % 2 == 0:
+            out.append(float(abs(verti[i]-overti[i])))
+        else:
+            out.append(float(abs(hori[i]-ohori[i])))
+    ohori = hori
+    overti = overti
+    liblo.send(target, "/fft/sbins", *out)
+
     cv2.imshow("horiz",cv2.resize(horiz,(256,256)))
     cv2.imshow("vert",cv2.resize(vert,(256,256)))
     if cv2.waitKey(1) & 0xFF == 27:
