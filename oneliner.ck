@@ -37,7 +37,7 @@ zgen() @=> int z[][];
 fun void setter() {
     OscRecv recv;
     // use port 7770
-    7770 => recv.port;
+    7771 => recv.port;
     recv.listen();
     recv.event("/fft/sbins,f f f f f f f f f f f f f f f f") @=> OscEvent @ rate_event;
     while( true )

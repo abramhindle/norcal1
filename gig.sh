@@ -30,11 +30,12 @@ alias OSD="osd_cat -p middle -A center -f '-*-helvetica-*-r-*-*-34-*-*-*-*-*-*-*
 
 (
     cd more-history-mean 
-    gnome-terminal -e bash csoundit.sh &
+    gnome-terminal -t "Csound FFT" -e "bash csoundit.sh" &
+    sleep 6
     ruby disconnect-jack.rb csound6
-    jack_connect chuck:output1 threshMixer:input2 
-    jack_connect chuck:output2 threshMixer:input2    
-    gnome-terminal -e python stft-videosonify-osc.py &
+    jack_connect meanHist:output1 threshMixer:input2 
+    jack_connect meanHist:output2 threshMixer:input2    
+    gnome-terminal -e "python stft-videosonify-osc.py" &
 )
 
 echo "Press Enter when you want the performance to start!
@@ -54,3 +55,4 @@ killall csound
 killall csound6
 killall chuck
 killall stft-videosonify-osc.py
+pgrep -f stft | xargs kill
