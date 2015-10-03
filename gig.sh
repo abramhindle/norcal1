@@ -22,8 +22,8 @@
     gnome-terminal -t ChucK -e "chuck oneliner.ck" &
     sleep 6
     ruby disconnect-jack.rb ChucK   
-    jack_connect ChucK:outport\ 0 threshMixer:input1 
-    jack_connect ChucK:outport\ 1 threshMixer:input1
+    jack_connect ChucK:outport\ 0 threshMixer:input2
+    jack_connect ChucK:outport\ 1 threshMixer:input2
 
 )
 
@@ -33,8 +33,8 @@
     gnome-terminal -t "meanHist CSound" -e "bash csoundit.sh" &
     sleep 6
     ruby disconnect-jack.rb meanHist
-    jack_connect meanHist:output1 threshMixer:input2 
-    jack_connect meanHist:output2 threshMixer:input2    
+    jack_connect meanHist:output1 threshMixer:input1
+    jack_connect meanHist:output2 threshMixer:input1    
     gnome-terminal -t "meanHist py" -e "python stft-videosonify-osc.py -c 1 -a 2 -b -0.3" &
 )
 
