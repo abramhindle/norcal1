@@ -42,7 +42,7 @@ echo "Press Enter when you want the performance to start!"
 read
 (sleep 3; echo ACT I: Liars | ./OSD.sh) &
 (sleep 300; echo Closing ACT I| ./OSD.sh) &
-(sleep 360; echo ACT II: Gluttonous | ./OSD.sh)
+(sleep 360; echo ACT II: Gluttonous | ./OSD.sh) &
 (sleep 660; echo Closing ACT II| ./OSD.sh) &
 (sleep 720; echo ACT III: Violent Against Art | ./OSD.sh) &
 (sleep 1020; echo Closing ACT III| ./OSD.sh) &
