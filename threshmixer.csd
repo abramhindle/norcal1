@@ -41,7 +41,7 @@ FLpanel 	"Thresh Mixer",200,200
     ;FLsetFont   7, ibox0
                 
     gkamp1,    iknob1 FLknob  "AMP1", 0.001, 4, -1,1, -1, 50, 0,0
-    gkamp2,    iknob2 FLknob  "AMP2", 0.001, 4, -1,1, -1, 50, 50,0
+    gkamp2,    iknob2 FLknob  "AMP2", 0.001, 32, -1,1, -1, 50, 50,0
     gkamp3,    iknob3 FLknob  "AMP3", 0.001, 4, -1,1, -1, 50, 100,0
     gkamp4,    iknob4 FLknob  "KAMP", 0.001, 4, -1,1, -1, 50, 150,0
     gkthresh1,    iknobthresh1 FLknob  "Threshold1", 0.0001, 1.0, -1,1, -1, 50, 0,100
