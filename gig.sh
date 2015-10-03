@@ -30,15 +30,15 @@ alias OSD="osd_cat -p middle -A center -f '-*-helvetica-*-r-*-*-34-*-*-*-*-*-*-*
 
 (
     cd more-history-mean 
-    gnome-terminal -t "Csound FFT" -e "bash csoundit.sh" &
+    gnome-terminal -t "meanHist CSound" -e "bash csoundit.sh" &
     sleep 6
-    ruby disconnect-jack.rb csound6
+    ruby disconnect-jack.rb meanHist
     jack_connect meanHist:output1 threshMixer:input2 
     jack_connect meanHist:output2 threshMixer:input2    
-    gnome-terminal -e "python stft-videosonify-osc.py" &
+    gnome-terminal -t "meanHist py" -e "python stft-videosonify-osc.py" &
 )
 
-echo "Press Enter when you want the performance to start!
+echo "Press Enter when you want the performance to start!"
 read
 (sleep 3; echo ACT I: Liars | OSD) &
 (sleep 300; echo Closing ACT I| OSD) &
@@ -51,8 +51,4 @@ sleep 1080
 echo Finale: Baphomet | OSD
 echo Press enter to kill everything
 read
-killall csound
-killall csound6
-killall chuck
-killall stft-videosonify-osc.py
-pgrep -f stft | xargs kill
+bash kill.sh
