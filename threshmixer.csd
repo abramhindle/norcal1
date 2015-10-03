@@ -13,15 +13,16 @@
 	ksmps = 1
 	nchnls = 4
         0dbfs = 1.0
-
+githresh1i = 0.021
+githresh2i = 0.1
 
       gkmute1 init 1
       gkmute2 init 1
       gkmute3 init 1
       gkmute4 init 1
       gkport init 0.001
-      gkthresh1 init 0
-      gkthresh2 init 0
+      gkthresh1 init githresh1i
+      gkthresh2 init githresh2i
       gkignore init 1
 ;zakinit 20,20
 
@@ -54,6 +55,8 @@ FLpanel 	"Thresh Mixer",200,200
     FLsetVal_i   1.0, iknob2
     FLsetVal_i   0.0, iknob3
     FLsetVal_i   1.0, iknob4
+    FLsetVal_i   githresh1i, iknobthresh1
+    FLsetVal_i   githresh2i, iknobthresh2
     FLsetVal_i   0.001, iknobport
     FLsetVal_i   1.0, iignorebutton
     
@@ -76,10 +79,12 @@ FLrun		;***** runs the widget thread
         instr 2
 	a1,a2,a3,a4 inq
         ka4 downsamp (gkamp4 - gimin)*a4
+        ka4 = abs(ka4)
         kmix1_ = (gkignore > 0 || ka4 < gkthresh1 || ka4 > gkthresh2)?1:0
 	kmix1	portk kmix1_,gkport
         kmix2_ = (gkignore > 0 || ka4 >= gkthresh1)?1:0
 	kmix2	portk kmix2_,gkport
+    printk2 gkthresh1
 	; kmix3_ = (ka4 < gkthresh1 && ka4 > (-1*gkthresh2))?1:0
 	; kmix3	portk kmix3_,gkport
 	aa1 = a1 * kmix1 * gkmute1 * (gkamp1 - gimin) 
