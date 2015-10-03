@@ -29,7 +29,7 @@
 gimin = 0.001
 
 FLcolor	180,200,199
-FLpanel 	"Silent Mixer",200,200
+FLpanel 	"Thresh Mixer",200,200
     istarttim = 0
     idropi = 666
     idur = 1
