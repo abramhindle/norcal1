@@ -35,7 +35,7 @@
     ruby disconnect-jack.rb meanHist
     jack_connect meanHist:output1 threshMixer:input2 
     jack_connect meanHist:output2 threshMixer:input2    
-    gnome-terminal -t "meanHist py" -e "python stft-videosonify-osc.py" &
+    gnome-terminal -t "meanHist py" -e "python stft-videosonify-osc.py -c 1 -a 2 -b -0.3" &
 )
 
 echo "Press Enter when you want the performance to start!"

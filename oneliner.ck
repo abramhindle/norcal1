@@ -39,6 +39,7 @@ fun void setter() {
     // use port 7770
     7771 => recv.port;
     recv.listen();
+    // recv.event("/fft/sbins,f f f f f f f f f f f f f f f f") @=> OscEvent @ rate_event;
     recv.event("/fft/sbins,f f f f f f f f f f f f f f f f") @=> OscEvent @ rate_event;
     while( true )
     {

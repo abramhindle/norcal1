@@ -10,7 +10,7 @@ import time
 import logging
 import scipy.ndimage.morphology
 import argparse
-import timeout_decorator
+
 
 logging.basicConfig(stream = sys.stderr, level=logging.INFO)
 # 1. get kinect input
