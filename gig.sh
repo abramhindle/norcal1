@@ -1,7 +1,7 @@
 # turn off power saving
 # echo 'performance' > '/sys/class/scsi_host/host5/link_power_management_policy'
 
-alias OSD="osd_cat -p middle -A center -f '-*-helvetica-*-r-*-*-34-*-*-*-*-*-*-*' -d 10 -s 2 -S red -c green"
+# alias OSD="osd_cat -p middle -A center -f '-*-helvetica-*-r-*-*-34-*-*-*-*-*-*-*' -d 10 -s 2 -S red -c green"
 
 # start thresh mixer
 
@@ -40,15 +40,17 @@ alias OSD="osd_cat -p middle -A center -f '-*-helvetica-*-r-*-*-34-*-*-*-*-*-*-*
 
 echo "Press Enter when you want the performance to start!"
 read
-(sleep 3; echo ACT I: Liars | OSD) &
-(sleep 300; echo Closing ACT I| OSD) &
-(sleep 360; echo ACT II: Gluttonous | OSD)
-(sleep 660; echo Closing ACT II| OSD) &
-(sleep 720; echo ACT III: Violent Against Art | OSD)
-(sleep 1020; echo Closing ACT III| OSD) &
+(sleep 3; echo ACT I: Liars | ./OSD.sh) &
+(sleep 300; echo Closing ACT I| ./OSD.sh) &
+(sleep 360; echo ACT II: Gluttonous | ./OSD.sh)
+(sleep 660; echo Closing ACT II| ./OSD.sh) &
+(sleep 720; echo ACT III: Violent Against Art | ./OSD.sh) &
+(sleep 1020; echo Closing ACT III| ./OSD.sh) &
 # sleep 18 minute
-sleep 1080
-echo Finale: Baphomet | OSD
+echo sleep 1080
+echo We faked the sleep, press enter to end!
+read
+echo Finale: Baphomet | ./OSD.sh
 echo Press enter to kill everything
 read
 bash kill.sh
