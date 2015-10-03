@@ -10,7 +10,7 @@ Step s => dac;
 [1,1,1,1,1,1] @=> int z11[];
 
 
-
+[65,67,256,32,31,12] @=> int maxes[];
 
 
 
@@ -51,7 +51,7 @@ fun void setter() {
 	    { 
 	        
 	        for( 0 => int i; i < z11.cap(); i++ ) {
-                (rate_event.getFloat()*255*10000) $ int => z11[i];
+                ((rate_event.getFloat()*255*10000) $ int) % maxes[i] => z11[i];
             }
             for (0 => int i; i < z.cap() - 1; i++) {
                 z[i+1] @=> z[i];
