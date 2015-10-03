@@ -43,11 +43,11 @@ FLpanel 	"Thresh Mixer",200,200
     gkamp2,    iknob2 FLknob  "AMP2", 0.001, 4, -1,1, -1, 50, 50,0
     gkamp3,    iknob3 FLknob  "AMP3", 0.001, 4, -1,1, -1, 50, 100,0
     gkamp4,    iknob4 FLknob  "KAMP", 0.001, 4, -1,1, -1, 50, 150,0
-    gkthresh1,    iknobthresh1 FLknob  "Threshold1", 0.01, 1.5, -1,1, -1, 50, 0,100
-    gkthresh2,    iknobthresh2 FLknob  "Threshold2", 0.01, 1.5, -1,1, -1, 50, 50,100
+    gkthresh1,    iknobthresh1 FLknob  "Threshold1", 0.0001, 1.0, -1,1, -1, 50, 0,100
+    gkthresh2,    iknobthresh2 FLknob  "Threshold2", 0.0001, 1.0, -1,1, -1, 50, 50,100
     gkport,    iknobport FLknob  "Port", 0.01, 1, -1,1, -1, 50, 100,100
     ;                                      ionioffitype
-    gkignore,  ibutton  FLbutton  "Ignore Thresh",0,1,22,50,25,150,75,-1
+    gkignore,  ibutton  FLbutton  "Ignore Thresh",1,0,22,75,25,150,75,-1
 
     
     FLsetVal_i   1.0, iknob1
@@ -75,12 +75,11 @@ FLrun		;***** runs the widget thread
         instr 2
 	a1,a2,a3,a4 inq
         ka4 downsamp (gkamp4 - gimin)*a4
-        ka4 = abs(ka4)
-        printk2 gkignore
         kmix1_ = (gkignore > 0 || ka4 < gkthresh1 || ka4 > gkthresh2)?1:0
 	kmix1	portk kmix1_,gkport
         kmix2_ = (gkignore > 0 || ka4 >= gkthresh1)?1:0
 	kmix2	portk kmix2_,gkport
+        printk2 kmix1
 	; kmix3_ = (ka4 < gkthresh1 && ka4 > (-1*gkthresh2))?1:0
 	; kmix3	portk kmix3_,gkport
 	aa1 = a1 * kmix1 * gkmute1 * (gkamp1 - gimin) 
