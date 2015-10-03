@@ -6,20 +6,36 @@ alias OSD="osd_cat -p middle -A center -f '-*-helvetica-*-r-*-*-34-*-*-*-*-*-*-*
 # start thresh mixer
 
 (
-    cd mixer
-    gnome-terminal -e csound threshmixer.csd &
+    gnome-terminal -t threshMixer -e "csound threshmixer.csd" &
     sleep 6;
     # disconnect it
-    ruby disconnect-jack.rb threshmixer
+    ruby disconnect-jack.rb threshMixer
     # connect it
-    jack_connect threshmixer:output1 system:output1
-    jack_connect threshmixer:output2 system:output1
-    jack_connect threshmixer:output1 system:output2
-    jack_connect threshmixer:output2 system:output2
-    jack_connect system:input1 threshmixer:input4
+    jack_connect threshMixer:output1 system:playback_1
+    jack_connect threshMixer:output2 system:playback_1
+    jack_connect threshMixer:output1 system:playback_2
+    jack_connect threshMixer:output2 system:playback_2
+    jack_connect system:capture_1 threshMixer:input4
+)
+
+(
+    gnome-terminal -t ChucK -e "chuck oneliner.ck" &
+    sleep 6
+    ruby disconnect-jack.rb ChucK   
+    jack_connect ChucK:outport\ 0 threshMixer:input1 
+    jack_connect ChucK:outport\ 1 threshMixer:input1
+
 )
 
 
+(
+    cd more-history-mean 
+    gnome-terminal -e bash csoundit.sh &
+    ruby disconnect-jack.rb csound6
+    jack_connect chuck:output1 threshMixer:input2 
+    jack_connect chuck:output2 threshMixer:input2    
+    gnome-terminal -e python stft-videosonify-osc.py &
+)
 
 echo "Press Enter when you want the performance to start!
 read
@@ -32,3 +48,9 @@ read
 # sleep 18 minute
 sleep 1080
 echo Finale: Baphomet | OSD
+echo Press enter to kill everything
+read
+killall csound
+killall csound6
+killall chuck
+killall stft-videosonify-osc.py
