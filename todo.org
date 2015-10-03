@@ -1,0 +1,7 @@
+* TODO
+  - [X] Set Thresh Mixer
+  - [X] Move button on threshmixer
+  - [X] Allow resizing of horiz and verti
+  - [ ] Practice Set 1
+  - [ ] Practice Set 2
+  - [ ] Practice Set 3

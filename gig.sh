@@ -35,7 +35,7 @@
     ruby disconnect-jack.rb meanHist
     jack_connect meanHist:output1 threshMixer:input1
     jack_connect meanHist:output2 threshMixer:input1    
-    gnome-terminal -t "meanHist py" -e "python stft-videosonify-osc.py -c 1 -a 2 -b -0.3" &
+    gnome-terminal -t "meanHist py" -e "python stft-videosonify-osc.py -c 1 -a 2 -b -0.3 -z 15" &
 )
 
 echo "Press Enter when you want the performance to start!"
@@ -48,7 +48,8 @@ read
 (sleep 1020; echo Closing ACT III| ./OSD.sh) &
 # sleep 18 minute
 echo sleep 1080
-echo We faked the sleep, press enter to end!
+(sleep 1800; echo done sleeping!; echo Finale: Baphomet | ./OSD.sh) &
+# echo We faked the sleep, press enter to end!
 read
 echo Finale: Baphomet | ./OSD.sh
 echo Press enter to kill everything

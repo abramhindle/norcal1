@@ -48,7 +48,7 @@ FLpanel 	"Thresh Mixer",200,200
     gkthresh2,    iknobthresh2 FLknob  "Threshold2", 0.0001, 1.0, -1,1, -1, 50, 50,100
     gkport,    iknobport FLknob  "Port", 0.001, 1, -1,1, -1, 50, 100,100
     ;                                      ionioffitype
-    gkignore,  iignorebutton  FLbutton  "Ignore Thresh",1,0,22,75,25,150,75,-1
+    gkignore,  iignorebutton  FLbutton  "Ignore Thresh",1,0,22,50,50,150,100,-1
 
     
     FLsetVal_i   0.0, iknob1
